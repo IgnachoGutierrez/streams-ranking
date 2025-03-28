@@ -22,7 +22,7 @@ async function start() {
       });
     
     app.listen(port, () => {
-      logger.info(`Example app listening on port ${port}`)
+      logger.info(`Example app listening on port ${port}`);
     });
 }
 
