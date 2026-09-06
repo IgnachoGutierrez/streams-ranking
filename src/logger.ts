@@ -1,4 +1,4 @@
-import pino from 'pino';
+import {pino} from 'pino';
 
 const options: pino.LoggerOptions = {
     timestamp: pino.stdTimeFunctions.isoTime,

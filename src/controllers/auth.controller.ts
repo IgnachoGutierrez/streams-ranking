@@ -1,9 +1,9 @@
-import express, { Request, Response } from 'express';
-import { Query } from 'express-serve-static-core';
+import express, { type Request, type Response } from 'express';
+import type { Query } from 'express-serve-static-core';
 
-import { generateRandomString, generateToken } from "../services/auth.service";
-import config from '../config/config';
-import logger from '../logger';
+import { generateRandomString, generateToken } from "../services/auth.service.js";
+import config from '../config/config.js';
+import logger from '../logger.js';
 
 const stateKey = 'spotify_auth_state';
 

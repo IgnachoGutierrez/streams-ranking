@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { handleAuthorizationCode, login } from '../controllers/auth.controller';
+import { handleAuthorizationCode, login } from '../controllers/auth.controller.js';
 
 const router = express.Router();
 

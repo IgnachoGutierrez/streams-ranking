@@ -3,11 +3,11 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-import express, { NextFunction, Request, Response } from 'express';
+import express, { type NextFunction, type Request, type Response } from 'express';
 import cookieParser from 'cookie-parser';
 
-import logger from './logger';
-import routes from './routes';
+import logger from './logger.js';
+import routes from './routes/index.js';
 
 const app = express();
 
