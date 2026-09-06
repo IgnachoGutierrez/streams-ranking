@@ -15,6 +15,7 @@ loggingTransports.push({
 if (process.env.NODE_ENV !== 'production') {
     loggingTransports.push({
       target: "pino-pretty",
+      level: 'trace',
       options: {
         colorize: true,
       },
