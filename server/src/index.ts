@@ -1,5 +1,5 @@
-import app from './app';
-import logger from './logger';
+import app from './app.js';
+import logger from './logger.js';
 
 const port = 3000;
 
@@ -22,7 +22,7 @@ async function start() {
       });
     
     app.listen(port, () => {
-      logger.info(`Example app listening on port ${port}`)
+      logger.info(`Example app listening on port ${port}`);
     });
 }
 
