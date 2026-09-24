@@ -79,3 +79,18 @@ export async function handleAuthorizationCode(req: TypedRequestQuery<{
       return res.status(502).json({ error: 'token_generation_failed' });
     }
 }
+
+export function getAccessToken(req: Request, res: Response) {
+    const token = req.cookies[ACCESS_TOKEN_COOKIE];
+    
+    if (!token) return res.status(401).json({ error: 'not_authenticated' });
+    
+    res.json({ accessToken: token }); // add expires_at so the client knows when to refetch
+}
+
+export function me(req: Request, res: Response) {
+  const token = req.cookies[ACCESS_TOKEN_COOKIE];
+  const isAuthenticated = Boolean(token);
+  
+  return res.json({ authenticated: isAuthenticated });
+}
