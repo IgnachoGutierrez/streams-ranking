@@ -1,11 +1,12 @@
 import crypto from 'crypto';
 import config from '../config/config.js';
+import { TokenSchema, type TokenResponse } from '../schemas/auth.schema.js';
 
 export const generateRandomString = (length: number) => {
     return crypto.randomBytes(60).toString("hex").slice(0, length);
 }
   
-export async function generateToken(code: string): Promise<{ refresh_token: string; access_token: string }> {
+export async function generateToken(code: string): Promise<TokenResponse> {
     const { redirectUri, clientId, clientSecret } = config;
 
     const bodyParams = new URLSearchParams({
@@ -25,5 +26,5 @@ export async function generateToken(code: string): Promise<{ refresh_token: stri
 
     const data = await response.json();
 
-    return data as { refresh_token: string; access_token: string };
+    return TokenSchema.parse(data);
 }
