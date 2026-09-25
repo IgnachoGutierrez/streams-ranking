@@ -2,5 +2,5 @@
   "watch": ["src"],
   "ext": "ts",
   "ignore": ["dist"],
-  "exec": "tsx --env-file=.env"
+  "exec": "tsx --env-file-if-exists=\"${ENV_FILE:-$HOME/.config/spotify-streams-app/.env.dev}\" --env-file-if-exists=.env"
 }
