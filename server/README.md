@@ -15,6 +15,12 @@ repository**.
 
 If any of these are missing, the server stops at startup with an error naming the variable.
 
+### Optional variables
+
+| Variable   | Description                                           | Default          | Example                               |
+|------------|-------------------------------------------------------|------------------|---------------------------------------|
+| `LOG_FILE` | Path of the file the server writes its logs to. Use it to send logs somewhere other than the project folder, such as a system log directory. Relative paths are resolved from the directory the server is started in (`server/` with `npm run dev`). Missing parent directories are created automatically. | | `/var/log/streams-ranking/api.log`    |
+
 ### Which files are loaded
 
 `npm run dev` loads these files in order. Both are optional:

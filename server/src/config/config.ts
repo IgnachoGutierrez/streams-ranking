@@ -3,6 +3,7 @@ type Config = {
     clientId: string;
     clientSecret: string;
     frontendUrl: string;
+    logFile?: string;
 }
 
 if (!process.env.REDIRECT_URI) {
@@ -26,6 +27,7 @@ const config: Config = {
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     frontendUrl: process.env.FRONTEND_URL,
+    logFile: process.env.LOG_FILE
 }
 
 export default config;
