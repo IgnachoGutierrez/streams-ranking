@@ -1,0 +1,15 @@
+@use '../../../styles/brand' as brand;
+
+:host(.cta--gradient) a {
+  background: brand.$brand-gradient;
+  color: brand.$text-light;
+
+  &:hover {
+    background: brand.$brand-gradient-hover;
+  }
+}
+
+:host(.cta--light) a {
+  background: brand.$text-light;
+  color: brand.$plum;
+}
