@@ -1,0 +1,55 @@
+@use '../../../../styles/brand';
+
+:host {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: block;
+}
+
+.toolbar {
+  gap: 8px;
+  padding: 0 16px;
+  background: brand.$content-bg;
+  color: brand.$text-light;
+  border-bottom: 1px solid rgb(255 255 255 / 8%);
+
+  &__brand {
+    margin-right: auto;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: brand.$text-light;
+    text-decoration: none;
+  }
+
+  &__links {
+    display: none;
+  }
+
+  // The CTA is already in the hero on mobile; the menu button takes its place.
+  &__cta {
+    display: none;
+  }
+
+  @include brand.up {
+    padding: 0 24px;
+
+    &__brand {
+      margin-right: 16px;
+    }
+
+    &__links {
+      display: flex;
+      flex: 1;
+      gap: 4px;
+    }
+
+    &__cta {
+      display: block;
+    }
+
+    &__menu-button {
+      display: none;
+    }
+  }
+}

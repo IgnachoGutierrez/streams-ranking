@@ -1,0 +1,20 @@
+<mat-toolbar class="toolbar">
+  <a class="toolbar__brand" routerLink="/" aria-label="Ir al inicio">Streams Ranking</a>
+
+  <nav class="toolbar__links" aria-label="Principal">
+    @for (link of links; track link.fragment) {
+      <a mat-button routerLink="/" [fragment]="link.fragment">{{ link.label }}</a>
+    }
+  </nav>
+
+  <app-ranking-cta class="toolbar__cta" variant="gradient" />
+
+  <button class="toolbar__menu-button" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Abrir menú">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    @for (link of links; track link.fragment) {
+      <a mat-menu-item routerLink="/" [fragment]="link.fragment">{{ link.label }}</a>
+    }
+  </mat-menu>
+</mat-toolbar>
