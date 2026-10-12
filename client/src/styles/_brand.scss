@@ -1,0 +1,33 @@
+// Design tokens for the landing page. See SPECS.md §3.
+
+$brand-gradient: linear-gradient(-225deg, #a445b2 0%, #d41872 52%, #f06 100%);
+$brand-gradient-hover: linear-gradient(-225deg, #a445b2 0%, #d41872 40%, #f06 70%);
+
+$magenta: #d41872;
+$plum: #44133c;
+$text-light: #f2f2f2;
+$text-body: #afafaf;
+
+$page-bg: #161215;
+$content-bg: #111;
+$panel-bg: rgb(33 33 33 / 58%);
+
+$radius-lg: 10px;
+$radius-sm: 5px;
+
+$bp: 480px;
+$content-max: 1330px;
+
+@mixin section-title {
+  font-family: Roboto, sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 2.25rem;
+  color: $text-light;
+}
+
+@mixin up {
+  @media screen and (min-width: $bp) {
+    @content;
+  }
+}
