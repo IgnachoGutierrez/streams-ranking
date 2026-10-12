@@ -1,0 +1,42 @@
+@use '../../../styles/brand';
+
+// Full-width grid with a centred content column (max $content-max incl. 16px gutters).
+// Children sit in the content column; full-bleed sections opt in with `grid-column: 1 / -1`.
+.landing {
+  --content-edge: max(16px, calc(50% - #{brand.$content-max * 0.5 - 16px}));
+
+  display: grid;
+  grid-template-columns: minmax(16px, 1fr) minmax(0, #{brand.$content-max - 32px}) minmax(16px, 1fr);
+  row-gap: 50px;
+  padding-bottom: 50px;
+  background: linear-gradient(
+    to right,
+    brand.$page-bg calc(50% - #{brand.$content-max * 0.5}),
+    brand.$content-bg calc(50% - #{brand.$content-max * 0.5}) calc(50% + #{brand.$content-max * 0.5}),
+    brand.$page-bg calc(50% + #{brand.$content-max * 0.5})
+  );
+
+  > * {
+    grid-column: 2;
+  }
+
+  > app-hero {
+    grid-column: 1 / -1;
+  }
+
+  @include brand.up {
+    row-gap: 100px;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

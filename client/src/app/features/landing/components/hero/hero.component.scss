@@ -1,0 +1,65 @@
+@use '../../../../../styles/brand';
+
+:host {
+  display: block;
+}
+
+// Content column edge: 16px gutter, or the centred $content-max container on wide screens.
+$edge: max(16px, calc(50% - #{brand.$content-max * 0.5 - 16px}));
+
+.hero {
+  display: grid;
+  gap: 40px;
+  padding: 15px 0 0 calc(#{$edge} + 15px);
+  background-image: brand.$brand-gradient;
+  overflow: hidden;
+
+  @include brand.up {
+    display: flex;
+    gap: 0;
+    padding: 50px #{$edge} 0 calc(#{$edge} + 50px);
+
+    > * {
+      flex: 1 1 50%;
+    }
+  }
+}
+
+.hero__text {
+  display: grid;
+  gap: 25px;
+  color: brand.$text-light;
+  align-content: center;
+
+  @include brand.up {
+    grid-template-rows: auto auto 100px;
+  }
+}
+
+h1 {
+  margin: 0;
+  font: var(--mat-sys-display-medium);
+  letter-spacing: var(--mat-sys-display-medium-tracking);
+}
+
+p {
+  margin: 0;
+  max-width: 90%;
+  font: var(--mat-sys-body-large);
+  letter-spacing: var(--mat-sys-body-large-tracking);
+  line-height: 1.75rem;
+}
+
+.hero__screenshot img {
+  display: block;
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: left;
+  border-top-left-radius: var(--mat-sys-corner-medium);
+  border-top-right-radius: var(--mat-sys-corner-medium);
+
+  @include brand.up {
+    height: 400px;
+  }
+}
