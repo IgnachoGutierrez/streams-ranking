@@ -44,14 +44,16 @@ export async function handleAuthorizationCode(req: TypedRequestQuery<{
       const storedState = req.cookies[STATE_KEY] || null;
     
       if (!state || !storedState || state !== storedState) {
-    
+
         logger.warn({ state, storedState }, 'Spotify callback state mismatch');
-    
-        return res.status(403).json({ error: 'state_mismatch' });
+
+        res.status(403).json({ error: 'state_mismatch' });
+        return;
       }
-    
+
       if (code === null) {
-        return res.status(400).json({ error: 'missing_authorization_code' });
+        res.status(400).json({ error: 'missing_authorization_code' });
+        return;
       }
 
       res.clearCookie(STATE_KEY);
@@ -76,21 +78,24 @@ export async function handleAuthorizationCode(req: TypedRequestQuery<{
       res.redirect(config.frontendUrl);
     } catch (error) {
       logger.error(error);
-      return res.status(502).json({ error: 'token_generation_failed' });
+      res.status(502).json({ error: 'token_generation_failed' });
     }
 }
 
 export function getAccessToken(req: Request, res: Response) {
     const token = req.cookies[ACCESS_TOKEN_COOKIE];
-    
-    if (!token) return res.status(401).json({ error: 'not_authenticated' });
-    
+
+    if (!token) {
+      res.status(401).json({ error: 'not_authenticated' });
+      return;
+    }
+
     res.json({ accessToken: token }); // add expires_at so the client knows when to refetch
 }
 
 export function me(req: Request, res: Response) {
   const token = req.cookies[ACCESS_TOKEN_COOKIE];
   const isAuthenticated = Boolean(token);
-  
-  return res.json({ authenticated: isAuthenticated });
+
+  res.json({ authenticated: isAuthenticated });
 }

@@ -24,7 +24,8 @@ app.use((req, res, next) => {
   
   // Handle browser OPTIONS preflight requests
   if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
+    res.sendStatus(200);
+    return;
   }
 
   next();
@@ -40,7 +41,7 @@ app.get('/', (req: Request, res: Response) => {
   
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     logger.error(error);
-    return res
+    res
         .status(500)
         .send({ error: error.message });
 });
