@@ -1,0 +1,135 @@
+@use '../../../../../styles/brand';
+
+:host {
+  display: block;
+}
+
+$number-size: 28px;
+$line-color: rgb(242 242 242 / 12%);
+
+.how {
+  display: grid;
+  gap: 40px;
+  justify-items: start;
+  padding: 40px 20px;
+  background: brand.$panel-bg;
+  border-radius: brand.$radius-lg;
+  font-family: Roboto, sans-serif;
+
+  @include brand.up {
+    justify-items: center;
+  }
+}
+
+.how__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+
+  @include brand.up {
+    text-align: center;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.15rem;
+    line-height: 1.75rem;
+
+    @include brand.up {
+      max-width: 600px;
+    }
+  }
+}
+
+h2 {
+  @include brand.section-title;
+  margin: 0;
+}
+
+.how__accent {
+  background-image: brand.$brand-gradient;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.how__steps {
+  display: grid;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include brand.up {
+    max-width: 600px;
+  }
+}
+
+// Number in the left column, title and text in the right one, and a line
+// running from each number down to the next.
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: $number-size 1fr;
+  column-gap: 16px;
+  row-gap: 4px;
+  padding-bottom: 32px;
+
+  &:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    top: $number-size + 8px;
+    bottom: 8px;
+    left: $number-size * 0.5;
+    width: 1px;
+    background: $line-color;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  h3,
+  p {
+    grid-column: 2;
+    margin: 0;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: $number-size;
+    color: brand.$text-light;
+  }
+
+  // Light text keeps the contrast; the magenta underline marks it as the login link.
+  a {
+    color: inherit;
+    text-decoration: underline 2px brand.$magenta;
+    text-underline-offset: 4px;
+
+    &:hover,
+    &:focus-visible {
+      color: brand.$magenta;
+    }
+  }
+
+  p {
+    line-height: 1.5rem;
+  }
+}
+
+.step__number {
+  grid-row: 1 / span 2;
+  align-self: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $number-size;
+  height: $number-size;
+  border-radius: 50%;
+  background: $line-color;
+  color: brand.$text-light;
+  font-size: 0.875rem;
+  font-weight: 500;
+}

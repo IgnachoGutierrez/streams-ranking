@@ -1,0 +1,15 @@
+<section id="how-it-works" class="how">
+  <header class="how__heading">
+    <h2>Tu ranking en <span class="how__accent">tres pasos</span></h2>
+    <p>No hace falta registrarte: alcanza con tu cuenta de Spotify.</p>
+  </header>
+  <ol class="how__steps">
+    @for (step of steps; track step.label) {
+      <li class="step">
+        <span class="step__number" aria-hidden="true">{{ $index + 1 }}</span>
+        <h3>{{ step.label }}@if (step.loginLink) {<a [href]="loginUrl">{{ step.loginLink }}</a>}</h3>
+        <p>{{ step.text }}</p>
+      </li>
+    }
+  </ol>
+</section>
