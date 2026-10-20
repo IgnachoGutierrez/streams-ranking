@@ -86,8 +86,12 @@ h2 {
 
 .feature {
   display: grid;
-  gap: 10px;
+  gap: 15px;
   align-content: start;
+
+  @include brand.up {
+    gap: 10px;
+  }
 
   h3 {
     margin: 0;

@@ -10,14 +10,14 @@ $edge: max(16px, calc(50% - #{brand.$content-max * 0.5 - 16px}));
 .hero {
   display: grid;
   gap: 40px;
-  padding: 15px 0 0 calc(#{$edge} + 15px);
+  padding: 16px 16px 0 calc(#{$edge});
   background-image: brand.$brand-gradient;
   overflow: hidden;
 
   @include brand.up {
     display: flex;
     gap: 0;
-    padding: 50px #{$edge} 0 calc(#{$edge} + 50px);
+    padding: 50px #{$edge} 0 calc(#{$edge});
 
     > * {
       flex: 1 1 50%;
@@ -28,21 +28,21 @@ $edge: max(16px, calc(50% - #{brand.$content-max * 0.5 - 16px}));
 .hero__text {
   display: grid;
   gap: 25px;
-  padding-right: 15px;
   color: brand.$text-light;
   align-content: center;
+  text-align: center;
 
   @include brand.up {
     grid-template-rows: auto auto 100px;
-    padding-right: 0;
+    text-align: left;
   }
 }
 
 h1 {
   margin: 0;
-  font: var(--mat-sys-display-small);
-  letter-spacing: var(--mat-sys-display-small-tracking);
-  line-height: var(--mat-sys-display-small-line-height);
+  font: var(--mat-sys-display-medium);
+  letter-spacing: var(--mat-sys-display-medium-tracking);
+  line-height: var(--mat-sys-display-medium-line-height);
 
   @include brand.up {
     font: var(--mat-sys-display-medium);
@@ -53,10 +53,15 @@ h1 {
 
 p {
   margin: 0;
-  max-width: 90%;
   font: var(--mat-sys-body-large);
   letter-spacing: var(--mat-sys-body-large-tracking);
   line-height: 1.75rem;
+  text-align: center;
+
+  @include brand.up {
+    text-align: left;
+    max-width: 90%;
+  }
 }
 
 .hero__screenshot img {
