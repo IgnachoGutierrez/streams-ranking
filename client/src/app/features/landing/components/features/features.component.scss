@@ -66,6 +66,12 @@
 h2 {
   @include brand.section-title;
   margin: 0;
+
+  @include brand.up {
+    font: var(--mat-sys-display-medium);
+    letter-spacing: var(--mat-sys-display-medium-tracking);
+    line-height: var(--mat-sys-display-medium-line-height);
+  }
 }
 
 .features__items {

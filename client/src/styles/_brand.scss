@@ -19,9 +19,9 @@ $bp: 480px;
 $content-max: 1130px;
 
 @mixin section-title {
-  font: var(--mat-sys-display-medium);
-  letter-spacing: var(--mat-sys-display-medium-tracking);
-  line-height: 2.25rem;
+  font: var(--mat-sys-display-small);
+  letter-spacing: var(--mat-sys-display-small-tracking);
+  line-height: var(--mat-sys-display-small-line-height);
   color: $text-light;
 }
 

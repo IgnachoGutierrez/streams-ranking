@@ -28,18 +28,27 @@ $edge: max(16px, calc(50% - #{brand.$content-max * 0.5 - 16px}));
 .hero__text {
   display: grid;
   gap: 25px;
+  padding-right: 15px;
   color: brand.$text-light;
   align-content: center;
 
   @include brand.up {
     grid-template-rows: auto auto 100px;
+    padding-right: 0;
   }
 }
 
 h1 {
   margin: 0;
-  font: var(--mat-sys-display-medium);
-  letter-spacing: var(--mat-sys-display-medium-tracking);
+  font: var(--mat-sys-display-small);
+  letter-spacing: var(--mat-sys-display-small-tracking);
+  line-height: var(--mat-sys-display-small-line-height);
+
+  @include brand.up {
+    font: var(--mat-sys-display-medium);
+    letter-spacing: var(--mat-sys-display-medium-tracking);
+    line-height: var(--mat-sys-display-medium-line-height);
+  }
 }
 
 p {
@@ -52,14 +61,15 @@ p {
 
 .hero__screenshot img {
   display: block;
-  width: auto;
-  height: 100%;
+  width: 100%;
+  height: auto;
   object-fit: cover;
   object-position: left;
   border-top-left-radius: var(--mat-sys-corner-medium);
   border-top-right-radius: var(--mat-sys-corner-medium);
 
   @include brand.up {
+    width: auto;
     height: 400px;
   }
 }
