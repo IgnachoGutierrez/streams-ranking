@@ -1,0 +1,107 @@
+@use '@angular/material' as mat;
+@use '../../../../../styles/brand';
+
+:host {
+  display: block;
+}
+
+.features {
+  display: grid;
+  gap: 60px;
+  padding: 0;
+  font-family: Roboto, sans-serif;
+
+  @include brand.up {
+    padding: 0 20px;
+  }
+}
+
+.features__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+
+  @include brand.up {
+    text-align: center;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.15rem;
+    line-height: 1.75rem;
+
+    @include brand.up {
+      max-width: 60%;
+    }
+  }
+}
+
+.features__chips {
+  @include mat.chips-overrides((
+    outline-color: rgb(242 242 242 / 12%),
+    label-text-color: brand.$text-light,
+    label-text-font: 'Roboto, sans-serif',
+    label-text-weight: 500,
+  ));
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  @include brand.up {
+    justify-content: center;
+  }
+
+  mat-icon {
+    color: brand.$text-body;
+  }
+
+  // Spotify's own green, per their brand guidelines (not a brand token of ours).
+  .features__spotify {
+    color: #1ed760;
+  }
+}
+
+h2 {
+  @include brand.section-title;
+  margin: 0;
+}
+
+.features__items {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+
+  @include brand.up {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.feature {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+
+  h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: brand.$text-light;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.5rem;
+  }
+}
+
+.feature__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-image: brand.$brand-gradient;
+  border-radius: brand.$radius-lg;
+  color: brand.$text-light;
+}

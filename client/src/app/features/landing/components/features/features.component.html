@@ -1,0 +1,33 @@
+<section id="features" class="features">
+  <header class="features__heading">
+    <h2>Tu música más escuchada en Spotify</h2>
+    <p>¿Siempre quisiste saber lo que escuchas todos los días? En nuestra web vas a poder obtener los datos de lo más escuchados en tu cuenta de Spotify.</p>
+    <div class="features__chips">
+      <mat-chip>
+        <mat-icon matChipAvatar class="features__spotify" svgIcon="spotify" aria-hidden="true" />
+        Spotify
+      </mat-chip>
+      <mat-chip>
+        <mat-icon matChipAvatar aria-hidden="true">format_list_numbered</mat-icon>
+        Top 50
+      </mat-chip>
+      <mat-chip>
+        <mat-icon matChipAvatar aria-hidden="true">date_range</mat-icon>
+        3 períodos
+      </mat-chip>
+      <mat-chip>
+        <mat-icon matChipAvatar aria-hidden="true">money_off</mat-icon>
+        Gratis
+      </mat-chip>
+    </div>
+  </header>
+  <div class="features__items">
+    @for (feature of features; track feature.title) {
+      <article class="feature">
+        <span class="feature__icon"><mat-icon aria-hidden="true">{{ feature.icon }}</mat-icon></span>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.text }}</p>
+      </article>
+    }
+  </div>
+</section>
