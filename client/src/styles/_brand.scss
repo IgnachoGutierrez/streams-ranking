@@ -16,12 +16,11 @@ $radius-lg: 10px;
 $radius-sm: 5px;
 
 $bp: 480px;
-$content-max: 1330px;
+$content-max: 1130px;
 
 @mixin section-title {
-  font-family: Roboto, sans-serif;
-  font-size: 1.75rem;
-  font-weight: 800;
+  font: var(--mat-sys-display-medium);
+  letter-spacing: var(--mat-sys-display-medium-tracking);
   line-height: 2.25rem;
   color: $text-light;
 }

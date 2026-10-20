@@ -29,4 +29,6 @@ body {
   color: brand.$text-body;
   margin: 0;
   height: 100%;
+  font: var(--mat-sys-body-medium);
+  letter-spacing: var(--mat-sys-body-medium-tracking);
 }

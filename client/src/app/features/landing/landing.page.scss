@@ -9,12 +9,6 @@
   grid-template-columns: minmax(16px, 1fr) minmax(0, #{brand.$content-max - 32px}) minmax(16px, 1fr);
   row-gap: 50px;
   padding-bottom: 50px;
-  background: linear-gradient(
-    to right,
-    brand.$page-bg calc(50% - #{brand.$content-max * 0.5}),
-    brand.$content-bg calc(50% - #{brand.$content-max * 0.5}) calc(50% + #{brand.$content-max * 0.5}),
-    brand.$page-bg calc(50% + #{brand.$content-max * 0.5})
-  );
 
   > * {
     grid-column: 2;
