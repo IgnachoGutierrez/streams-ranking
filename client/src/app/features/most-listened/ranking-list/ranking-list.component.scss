@@ -1,0 +1,29 @@
+@use '../../../../styles/brand';
+
+.ranking-list {
+  background: brand.$panel-bg;
+  border-radius: brand.$radius-lg;
+  padding: 8px 0;
+}
+
+.ranking-list__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 700;
+  object-fit: cover;
+}
+
+.ranking-list__subtitle {
+  color: brand.$text-body;
+}
+
+.ranking-list__meta {
+  font-size: 11px;
+  color: brand.$text-body;
+  white-space: nowrap;
+}

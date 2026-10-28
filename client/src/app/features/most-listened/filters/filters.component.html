@@ -1,0 +1,23 @@
+<mat-button-toggle-group
+  class="filters__toggle"
+  [value]="period()"
+  (valueChange)="period.set($event)"
+  aria-label="Período"
+>
+  <mat-button-toggle value="1m">1M</mat-button-toggle>
+  <mat-button-toggle value="6m">6M</mat-button-toggle>
+  <mat-button-toggle value="all">
+    <mat-icon aria-hidden="true">history</mat-icon>
+    Todo
+  </mat-button-toggle>
+</mat-button-toggle-group>
+
+<mat-button-toggle-group
+  class="filters__toggle"
+  [value]="mode()"
+  (valueChange)="mode.set($event)"
+  aria-label="Tipo de ranking"
+>
+  <mat-button-toggle value="artists">Artistas</mat-button-toggle>
+  <mat-button-toggle value="songs">Canciones</mat-button-toggle>
+</mat-button-toggle-group>

@@ -1,0 +1,26 @@
+<mat-list class="ranking-list">
+  @for (item of items(); track item.id; let i = $index) {
+    <mat-list-item class="ranking-list__item">
+      <span
+        matListItemAvatar
+        [matBadge]="i + 1"
+        matBadgePosition="below after"
+        matBadgeSize="medium"
+        [matBadgeDescription]="'Puesto ' + (i + 1)"
+      >
+        @if (item.image) {
+          <img class="ranking-list__avatar" [src]="item.image" [alt]="item.title" />
+        } @else {
+          <span class="ranking-list__avatar" [style.background]="colorFor(item.id)">{{ item.title.charAt(0) }}</span>
+        }
+      </span>
+      <span matListItemTitle>{{ item.title }}</span>
+      @if (item.subtitle) {
+        <span matListItemLine class="ranking-list__subtitle">{{ item.subtitle }}</span>
+      }
+      @if (item.meta) {
+        <span class="ranking-list__meta" matListItemMeta>{{ item.meta }}</span>
+      }
+    </mat-list-item>
+  }
+</mat-list>

@@ -1,0 +1,12 @@
+<section class="most-listened">
+  <header class="most-listened__header">
+    <h1>Lo que más escuchaste</h1>
+    <p class="most-listened__hint">
+      Filtrá por período y descubrí tus artistas y canciones más escuchados en Spotify.
+    </p>
+  </header>
+
+  <app-filters [(period)]="period" [(mode)]="mode" />
+
+  <app-ranking-list [items]="displayItems()" />
+</section>

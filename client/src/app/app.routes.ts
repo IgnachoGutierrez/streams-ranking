@@ -6,4 +6,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/landing/landing.page').then((m) => m.LandingPage),
   },
+  {
+    path: 'most-listened',
+    loadComponent: () =>
+      import('./features/most-listened/most-listened.page').then((m) => m.MostListenedPage),
+  },
 ];
