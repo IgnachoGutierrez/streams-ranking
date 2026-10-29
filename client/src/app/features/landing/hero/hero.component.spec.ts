@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { RankingCtaComponent } from '../../../../shared/ranking-cta/ranking-cta.component';
+import { RankingCtaComponent } from '../../../shared/ranking-cta/ranking-cta.component';
 import { HeroComponent } from './hero.component';
 
 describe('HeroComponent', () => {

@@ -24,7 +24,7 @@ describe('ToolbarComponent', () => {
 
   it('points the section links to their fragments', () => {
     const hrefs = Array.from(host.querySelectorAll('nav a')).map((a) => a.getAttribute('href'));
-    expect(hrefs).toEqual(['/#features', '/#how-it-works']);
+    expect(hrefs).toEqual(['/#highlights', '/#how-it-works']);
   });
 
   it('links the brand to the home page', () => {

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { FeaturesComponent } from './features/features.component';
 import { HeroComponent } from './hero/hero.component';
+import { HighlightsComponent } from './highlights/highlights.component';
 import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 
 @Component({
   selector: 'app-landing-page',
-  imports: [HeroComponent, FeaturesComponent, HowItWorksComponent],
+  imports: [HeroComponent, HighlightsComponent, HowItWorksComponent],
   templateUrl: './landing.page.html',
   styleUrl: './landing.page.scss',
 })

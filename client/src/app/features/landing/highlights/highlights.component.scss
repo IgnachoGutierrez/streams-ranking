@@ -5,7 +5,7 @@
   display: block;
 }
 
-.features {
+.highlights {
   display: grid;
   gap: 60px;
   padding: 0;
@@ -16,7 +16,7 @@
   }
 }
 
-.features__heading {
+.highlights__heading {
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -37,7 +37,7 @@
   }
 }
 
-.features__chips {
+.highlights__chips {
   @include mat.chips-overrides((
     outline-color: rgb(242 242 242 / 12%),
     label-text-color: brand.$text-light,
@@ -58,7 +58,7 @@
   }
 
   // Spotify's own green, per their brand guidelines (not a brand token of ours).
-  .features__spotify {
+  .highlights__spotify {
     color: #1ed760;
   }
 }
@@ -74,7 +74,7 @@ h2 {
   }
 }
 
-.features__items {
+.highlights__items {
   display: grid;
   grid-template-columns: 1fr;
   gap: 40px;
@@ -84,7 +84,7 @@ h2 {
   }
 }
 
-.feature {
+.highlight {
   display: grid;
   gap: 15px;
   align-content: start;
@@ -105,7 +105,7 @@ h2 {
   }
 }
 
-.feature__icon {
+.highlight__icon {
   display: flex;
   align-items: center;
   justify-content: center;

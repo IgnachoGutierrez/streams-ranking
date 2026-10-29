@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { environment } from '../../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { HowItWorksComponent } from './how-it-works.component';
 
 describe('HowItWorksComponent', () => {

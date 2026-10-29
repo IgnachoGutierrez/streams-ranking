@@ -12,7 +12,7 @@ interface NavLink {
 }
 
 const NAV_LINKS: readonly NavLink[] = [
-  { label: 'Características', fragment: 'features' },
+  { label: 'Características', fragment: 'highlights' },
   { label: 'Cómo funciona', fragment: 'how-it-works' },
 ];
 
