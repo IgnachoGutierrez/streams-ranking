@@ -1,6 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
-import { RankingCtaComponent } from '../../../../shared/ranking-cta/ranking-cta.component';
+import { RankingCtaComponent } from '../../../shared/ranking-cta/ranking-cta.component';
 
 @Component({
   selector: 'app-hero',
