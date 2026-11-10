@@ -1,5 +1,6 @@
 import { httpResource } from "@angular/common/http";
 import { computed, Injectable } from "@angular/core";
+import { environment } from "../../../environments/environment";
 
 interface AuthMe { authenticated: boolean; }
 interface AuthToken { accessToken: string; }
@@ -10,7 +11,7 @@ interface AuthToken { accessToken: string; }
 export class AuthService {
   // 1) Who am I? Runs once on first injection; call refresh() to refetch.
   private readonly me = httpResource<AuthMe>(
-    () => ({ url: 'http://127.0.0.1:3000/auth/me' }),
+    () => ({ url: `${environment.apiUrl}/auth/me` }),
     {
       // replaces the tap() — inspect/validate the real shape here
       parse: (raw) => {
@@ -24,7 +25,7 @@ export class AuthService {
   //    Returning undefined keeps this resource idle (no request, value() === undefined).
   private readonly session = httpResource<AuthToken>(() =>
     this.me.value()?.authenticated
-      ? { url: 'http://127.0.0.1:3000/auth/token' }
+      ? { url: `${environment.apiUrl}/auth/token` }
       : undefined,
   );
 

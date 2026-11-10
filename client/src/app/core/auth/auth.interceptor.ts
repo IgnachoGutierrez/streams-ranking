@@ -1,9 +1,10 @@
 // auth.interceptor.ts
 import { HttpInterceptorFn } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 const CREDENTIALED_URLS = [
-  'http://127.0.0.1:3000/auth/token',
-  'http://127.0.0.1:3000/auth/me',
+  `${environment.apiUrl}/auth/token`,
+  `${environment.apiUrl}/auth/me`,
 ];
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
