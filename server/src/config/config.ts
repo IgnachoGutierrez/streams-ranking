@@ -4,6 +4,7 @@ type Config = {
     clientSecret: string;
     frontendUrl: string;
     logFile?: string;
+    lastfmApiKey?: string;
 }
 
 if (!process.env.REDIRECT_URI) {
@@ -27,7 +28,8 @@ const config: Config = {
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     frontendUrl: process.env.FRONTEND_URL,
-    logFile: process.env.LOG_FILE
+    logFile: process.env.LOG_FILE,
+    lastfmApiKey: process.env.LASTFM_API_KEY,
 }
 
 export default config;
