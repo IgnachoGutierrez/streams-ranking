@@ -19,7 +19,7 @@ export async function login(req: Request, res: Response) {
       maxAge: 10 * 60 * 1000, // 10 min to complete the round-trip
     });
 
-    const scope = 'user-read-private user-read-email';
+    const scope = 'user-top-read';
 
     const params: URLSearchParams = new URLSearchParams({
         response_type: 'code',
