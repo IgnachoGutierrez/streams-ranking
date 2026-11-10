@@ -1,7 +1,7 @@
 <mat-button-toggle-group
   class="filters__toggle"
   [value]="period()"
-  (valueChange)="period.set($event)"
+  (change)="period.set($event.value)"
   aria-label="Período"
 >
   <mat-button-toggle value="1m">1M</mat-button-toggle>
@@ -15,7 +15,7 @@
 <mat-button-toggle-group
   class="filters__toggle"
   [value]="mode()"
-  (valueChange)="mode.set($event)"
+  (change)="mode.set($event.value)"
   aria-label="Tipo de ranking"
 >
   <mat-button-toggle value="artists">Artistas</mat-button-toggle>
