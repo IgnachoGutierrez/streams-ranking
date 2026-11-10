@@ -39,6 +39,7 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!')
 });
   
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     logger.error(error);
     res
