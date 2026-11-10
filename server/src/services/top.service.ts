@@ -5,6 +5,7 @@ import {
     type TopItemsQuery,
     type TopSongsResponse,
 } from '../schemas/top.schema.js';
+import { getArtistMainGenre } from './lastfm.service.js';
 
 export class SpotifyApiError extends Error {
     readonly status: number;
@@ -64,9 +65,23 @@ async function fetchTopItems(
     return response.json();
 }
 
+// Spotify no longer returns artist genres, so the main genre comes from the
+// artist's top Last.fm tag. getArtistMainGenre never throws; unknown artists
+// just get no genre.
+async function withGenres(artists: TopArtistsResponse['items']) {
+    const genres = await Promise.all(artists.map((artist) => getArtistMainGenre(artist.name)));
+
+    return artists.map((artist, i) => {
+        const genre = genres[i];
+        return { ...artist, genres: genre ? [genre] : [] };
+    });
+}
+
 export async function getTopArtists(accessToken: string, query: TopItemsQuery): Promise<TopArtistsResponse> {
     const topArtistsData = await fetchTopItems('artists', accessToken, query);
-    return parseResponse(TopArtistsSchema, topArtistsData, 'artists');
+    const topArtists = parseResponse(TopArtistsSchema, topArtistsData, 'artists');
+
+    return { ...topArtists, items: await withGenres(topArtists.items) };
 }
 
 export async function getTopSongs(accessToken: string, query: TopItemsQuery): Promise<TopSongsResponse> {

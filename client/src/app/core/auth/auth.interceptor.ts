@@ -6,6 +6,7 @@ const CREDENTIALED_URLS = [
   `${environment.apiUrl}/auth/token`,
   `${environment.apiUrl}/auth/me`,
   `${environment.apiUrl}/top/songs`,
+  `${environment.apiUrl}/top/artists`,
 ];
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => { 
