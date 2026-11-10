@@ -8,5 +8,9 @@
 
   <app-filters [(period)]="period" [(mode)]="mode" />
 
-  <app-ranking-list [items]="displayItems()" />
+  @if (top.hasValue()) {
+    <app-ranking-list [items]="displayItems()"></app-ranking-list>
+  } @else {
+    <p class="most-listened__loading">Cargando...</p>
+  }
 </section>

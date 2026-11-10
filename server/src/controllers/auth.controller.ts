@@ -75,7 +75,7 @@ export async function handleAuthorizationCode(req: TypedRequestQuery<{
 
       logger.info('Stored Spotify tokens as httpOnly cookies');
     
-      res.redirect(config.frontendUrl);
+      res.redirect(config.frontendUrl + '/most-listened');
     } catch (error) {
       logger.error(error);
       res.status(502).json({ error: 'token_generation_failed' });

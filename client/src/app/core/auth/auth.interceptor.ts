@@ -5,9 +5,10 @@ import { environment } from '../../../environments/environment';
 const CREDENTIALED_URLS = [
   `${environment.apiUrl}/auth/token`,
   `${environment.apiUrl}/auth/me`,
+  `${environment.apiUrl}/top/songs`,
 ];
 
-export const authInterceptor: HttpInterceptorFn = (req, next) => {
+export const authInterceptor: HttpInterceptorFn = (req, next) => { 
   if (!CREDENTIALED_URLS.includes(req.url)) {
     return next(req);
   }

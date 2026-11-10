@@ -1,7 +1,8 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FiltersComponent, Mode, Period } from './filters/filters.component';
 import { RankingListComponent, RankingListItem } from './ranking-list/ranking-list.component';
-import { ARTISTS, RankingItem, SONGS } from './most-listened.mock-data';
+import { RankingItem, SONGS } from './most-listened.mock-data';
+import { TopService } from './top.service';
 
 /** Below this, the crossover count isn't telling enough to show. */
 const MIN_CROSSOVER = 2;
@@ -13,18 +14,28 @@ const MIN_CROSSOVER = 2;
   styleUrl: './most-listened.page.scss',
 })
 export class MostListenedPage {
-  protected readonly period = signal<Period>('1m');
-  protected readonly mode = signal<Mode>('songs');
+  private readonly topService = inject(TopService);
 
-  protected readonly items = computed(() => {
-    const list = this.mode() === 'songs' ? SONGS : ARTISTS;
-    return list.slice(0, this.limitFor(list));
-  });
-
+  readonly period = signal<Period>('1m');
+  readonly mode = signal<Mode>('songs');
+  
+  protected readonly top = this.topService.top(() => ({
+    mode: this.mode(),
+    period: this.period(),
+  }));
+  
   /** `items()` with each artist's crossover count resolved into `meta` text — the
    *  ranking list just renders `tag`/`meta`, with no notion of what they mean. */
-  protected readonly displayItems = computed<RankingListItem[]>(() =>
-    this.items().map((item) => ({ ...item, meta: this.metaFor(item) })),
+  protected readonly displayItems = computed<RankingListItem[]>(() => {
+    if (this.top.hasValue()) {
+      return this.top.value().items.map((item) => ({
+        ...item,
+        meta: this.metaFor(item),
+      }));
+    }
+
+    return [];
+  }
   );
 
   /** Songs for the same period as `items()`, regardless of the active mode — used to
