@@ -1,0 +1,29 @@
+# App server blocks with TLS. Mounted over ../templates by
+# docker-compose.prod.yml.
+include snippets/upstreams.conf;
+
+server {
+    listen 80 default_server;
+    server_name ${APP_DOMAIN};
+
+    # Let's Encrypt HTTP-01 challenge (certificate renewal).
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        return 301 https://${APP_DOMAIN}$request_uri;
+    }
+}
+
+server {
+    listen 443 ssl default_server;
+    http2 on;
+    server_name ${APP_DOMAIN};
+
+    ssl_certificate     /etc/letsencrypt/live/${APP_DOMAIN}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/${APP_DOMAIN}/privkey.pem;
+    include snippets/tls.conf;
+
+    include snippets/app-proxy.conf;
+}

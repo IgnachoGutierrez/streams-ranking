@@ -1,0 +1,12 @@
+# Retired site: every request is redirected to the app.
+server {
+    listen 80;
+    server_name ${LEGACY_DOMAIN} www.${LEGACY_DOMAIN};
+
+    # Old URLs with a specific new home go here, before the catch-all:
+    # location = /old/path { return 301 ${APP_ORIGIN}/new/path; }
+
+    location / {
+        return 301 ${APP_ORIGIN}$request_uri;
+    }
+}

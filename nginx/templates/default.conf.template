@@ -1,0 +1,11 @@
+# HTTP-only app server block (local runs, or behind another TLS terminator).
+# Rendered by the nginx image's envsubst step; named default.conf so it
+# replaces the image's stock welcome-page config.
+include snippets/upstreams.conf;
+
+server {
+    listen 80 default_server;
+    server_name ${APP_DOMAIN};
+
+    include snippets/app-proxy.conf;
+}

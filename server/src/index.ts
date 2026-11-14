@@ -17,13 +17,20 @@ async function start() {
       process.on('uncaughtException', unexpectedErrorHandler);
       process.on('unhandledRejection', unexpectedErrorHandler);
     
-      process.on('SIGTERM', () => {
-        logger.info('SIGTERM received');
-      });
-    
-    app.listen(port, () => {
+    const server = app.listen(port, () => {
       logger.info(`Example app listening on port ${port}`);
     });
+
+    // Sent by `docker stop` (SIGTERM) and Ctrl+C (SIGINT): finish in-flight
+    // requests, then exit, so the container stops without waiting to be killed.
+    const shutdown = (signal: string) => {
+      logger.info(`${signal} received`);
+      server.close(() => process.exit(0));
+      server.closeIdleConnections();
+    };
+
+    process.on('SIGTERM', () => shutdown('SIGTERM'));
+    process.on('SIGINT', () => shutdown('SIGINT'));
 }
 
 start();

@@ -1,0 +1,43 @@
+# Whole stack over plain HTTP: edge proxy -> Angular client + API server.
+# Configure with a .env file next to this one (see .env.template).
+# For production with TLS, add docker-compose.prod.yml on top.
+name: streams-ranking
+
+services:
+  edge:
+    image: nginx:stable-alpine
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-8080}:80"
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:-127.0.0.1}
+      APP_ORIGIN: ${APP_ORIGIN:-http://127.0.0.1:8080}
+      LEGACY_DOMAIN: ${LEGACY_DOMAIN:-legacy.invalid}
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates:ro
+      - ./nginx/snippets:/etc/nginx/snippets:ro
+    depends_on:
+      - client
+      - server
+
+  client:
+    build: ./client
+    restart: unless-stopped
+
+  server:
+    build: ./server
+    restart: unless-stopped
+    environment:
+      CLIENT_ID: ${CLIENT_ID:?set CLIENT_ID in .env}
+      CLIENT_SECRET: ${CLIENT_SECRET:?set CLIENT_SECRET in .env}
+      LASTFM_API_KEY: ${LASTFM_API_KEY:-}
+      # Both are derived from the public origin, so they cannot drift apart.
+      FRONTEND_URL: ${APP_ORIGIN:-http://127.0.0.1:8080}
+      REDIRECT_URI: ${APP_ORIGIN:-http://127.0.0.1:8080}/api/auth/callback
+      # Log to the container's stdout so `docker compose logs server` works.
+      LOG_FILE: /dev/stdout
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

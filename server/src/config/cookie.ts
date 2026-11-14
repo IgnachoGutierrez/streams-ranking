@@ -1,6 +1,10 @@
+import config from './config.js';
+
 export const tokenCookieOptions = {
   httpOnly: true,            // not readable from JS
-  secure: process.env.NODE_ENV === 'production',     // HTTPS-only outside dev
+  // HTTPS-only when the app is served over HTTPS. Based on the public origin,
+  // not NODE_ENV: the local Docker stack runs NODE_ENV=production over HTTP.
+  secure: config.frontendUrl.startsWith('https://'),
   sameSite: 'lax' as const,  // sent on the top-level redirect back from Spotify
   path: '/',
 };

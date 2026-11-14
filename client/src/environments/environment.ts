@@ -1,3 +1,4 @@
 export const environment = {
-  apiUrl: 'http://127.0.0.1:3000',
+  // Production: same origin as the app; the edge proxy forwards /api to the server.
+  apiUrl: '/api',
 };

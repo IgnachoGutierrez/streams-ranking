@@ -1,0 +1,26 @@
+# Production additions: ports 80/443, TLS server blocks, Let's Encrypt certs.
+# Use together with the base file:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+# or set COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml in .env.
+services:
+  edge:
+    ports: !override
+      - "80:80"
+      - "443:443"
+    volumes:
+      # Same target as the base file's templates mount, so this replaces it.
+      - ./nginx/templates-tls:/etc/nginx/templates:ro
+      - letsencrypt:/etc/letsencrypt:ro
+      - certbot-www:/var/www/certbot:ro
+
+  # Not started by `up`; run on demand to issue or renew certificates.
+  certbot:
+    image: certbot/certbot
+    profiles: ["certbot"]
+    volumes:
+      - letsencrypt:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
+
+volumes:
+  letsencrypt:
+  certbot-www:

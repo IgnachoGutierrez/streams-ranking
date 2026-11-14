@@ -1,0 +1,32 @@
+# Retired site with TLS: every request is redirected to the app. The old
+# domain still needs its own certificate, or https:// links to it fail before
+# the redirect is ever sent.
+server {
+    listen 80;
+    server_name ${LEGACY_DOMAIN} www.${LEGACY_DOMAIN};
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        return 301 ${APP_ORIGIN}$request_uri;
+    }
+}
+
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name ${LEGACY_DOMAIN} www.${LEGACY_DOMAIN};
+
+    ssl_certificate     /etc/letsencrypt/live/${LEGACY_DOMAIN}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/${LEGACY_DOMAIN}/privkey.pem;
+    include snippets/tls.conf;
+
+    # Old URLs with a specific new home go here, before the catch-all:
+    # location = /old/path { return 301 ${APP_ORIGIN}/new/path; }
+
+    location / {
+        return 301 ${APP_ORIGIN}$request_uri;
+    }
+}
