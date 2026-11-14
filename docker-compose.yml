@@ -12,10 +12,12 @@ services:
     environment:
       APP_DOMAIN: ${APP_DOMAIN:-127.0.0.1}
       APP_ORIGIN: ${APP_ORIGIN:-http://127.0.0.1:8080}
-      LEGACY_DOMAIN: ${LEGACY_DOMAIN:-legacy.invalid}
+      # Empty disables the retired-site redirect (see nginx/entrypoint).
+      LEGACY_DOMAIN: ${LEGACY_DOMAIN:-}
     volumes:
       - ./nginx/templates:/etc/nginx/templates:ro
       - ./nginx/snippets:/etc/nginx/snippets:ro
+      - ./nginx/entrypoint/25-optional-legacy.sh:/docker-entrypoint.d/25-optional-legacy.sh:ro
     depends_on:
       - client
       - server
