@@ -29,7 +29,7 @@ describe('HowItWorksComponent', () => {
 
   it('renders the 3 steps in order as an ordered list', () => {
     const titles = Array.from(el.querySelectorAll('ol.how__steps > li h3')).map((h) => h.textContent);
-    expect(titles).toEqual(['Presioná Ver mi ranking', 'Ingresá con tu cuenta', 'Mirá tu ranking']);
+    expect(titles).toEqual(['Presioná Ver mi ranking', 'Ingresá con tu cuenta', 'Mirá los resultados']);
   });
 
   it('links "Ver mi ranking" in the first step to the login', () => {
