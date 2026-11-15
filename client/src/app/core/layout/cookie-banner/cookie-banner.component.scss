@@ -1,0 +1,45 @@
+@use '../../../../styles/brand' as brand;
+
+.banner {
+  position: fixed;
+  inset: auto 16px 16px;
+  z-index: 1000;
+  max-width: brand.$content-max;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: brand.$content-bg;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: brand.$radius-lg;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 50%);
+  color: brand.$text-body;
+
+  @include brand.up {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.banner__title {
+  margin: 0 0 4px;
+  font: var(--mat-sys-title-medium);
+  color: brand.$text-light;
+}
+
+// Both choices are equally easy and equally visible (GDPR / AEPD guidance).
+.banner__actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+
+  button {
+    flex: 1;
+  }
+}

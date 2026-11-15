@@ -1,0 +1,15 @@
+@if (visible()) {
+  <section class="banner" role="region" aria-labelledby="cookie-banner-title">
+    <div class="banner__text">
+      <h2 id="cookie-banner-title" class="banner__title">Cookies</h2>
+      <p>
+        Usamos cookies de Google Analytics para saber cómo se usa la web y mejorarla.
+        Solo se activan si las aceptás.
+      </p>
+    </div>
+    <div class="banner__actions">
+      <button mat-stroked-button type="button" (click)="reject()">Rechazar</button>
+      <button mat-flat-button type="button" (click)="accept()">Aceptar</button>
+    </div>
+  </section>
+}
