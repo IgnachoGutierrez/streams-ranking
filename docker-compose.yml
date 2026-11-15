@@ -23,7 +23,11 @@ services:
       - server
 
   client:
-    build: ./client
+    build:
+      context: ./client
+      args:
+        # Baked into the bundle at build time; empty disables Google Analytics.
+        GA_MEASUREMENT_ID: ${GA_MEASUREMENT_ID:-}
     restart: unless-stopped
 
   server:

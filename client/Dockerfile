@@ -4,7 +4,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npm run build
+# Optional Google Analytics 4 measurement ID (G-...); empty disables analytics.
+ARG GA_MEASUREMENT_ID=""
+RUN npm run build -- --define "GA_MEASUREMENT_ID='${GA_MEASUREMENT_ID}'"
 
 # --- runtime: nginx serving the static bundle ---
 FROM nginx:stable-alpine
