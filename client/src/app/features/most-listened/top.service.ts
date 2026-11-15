@@ -29,12 +29,15 @@ export class TopService {
   private readonly auth = inject(AuthService);
 
   /** Must be called in an injection context (e.g. a field initializer), so the
-   *  resource is tied to the caller's lifetime, not the root injector. */
-  top(query: () => TopQuery): HttpResourceRef<TopResponse | undefined> {
+   *  resource is tied to the caller's lifetime, not the root injector.
+   *  `query` may return `undefined` to skip the request (the resource goes idle). */
+  top(query: () => TopQuery | undefined): HttpResourceRef<TopResponse | undefined> {
     return httpResource<TopResponse>(() => {
         if (!this.auth.token()) return undefined;
 
-        const { mode, period, limit = 50 } = query();
+        const q = query();
+        if (!q) return undefined;
+        const { mode, period, limit = 50 } = q;
         
         return {
             url: `${API_URL}/top/${mode}`,

@@ -8,8 +8,8 @@
 
   <app-filters [(period)]="period" [(mode)]="mode" />
 
-  @if (top.hasValue()) {
-    <app-ranking-list [items]="displayItems()"></app-ranking-list>
+  @if (displayItems(); as items) {
+    <app-ranking-list [items]="items"></app-ranking-list>
   } @else {
     <p class="most-listened__loading">Cargando...</p>
   }

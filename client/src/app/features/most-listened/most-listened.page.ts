@@ -1,7 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FiltersComponent, Mode, Period } from './filters/filters.component';
 import { RankingListComponent, RankingListItem } from './ranking-list/ranking-list.component';
-import { RankingItem, SONGS } from './most-listened.mock-data';
 import { TopService } from './top.service';
 
 /** Below this, the crossover count isn't telling enough to show. */
@@ -19,40 +18,40 @@ export class MostListenedPage {
   readonly period = signal<Period>('1m');
   readonly mode = signal<Mode>('songs');
   
-  protected readonly top = this.topService.top(() => ({
-    mode: this.mode(),
-    period: this.period(),
-  }));
-  
-  /** `items()` with each artist's crossover count resolved into `meta` text — the
-   *  ranking list just renders `tag`/`meta`, with no notion of what they mean. */
-  protected readonly displayItems = computed<RankingListItem[]>(() => {
-    if (this.top.hasValue()) {
-      return this.top.value().items.map((item) => ({
-        ...item,
-        meta: this.metaFor(item),
-      }));
-    }
+  /** Top songs for the period. Depends only on `period` (not `mode`), so switching
+   *  modes never re-requests them: the songs view lists them and the artists view
+   *  reuses them for the crossover count. */
+  private readonly songs = this.topService.top(() => ({ mode: 'songs', period: this.period() }));
 
-    return [];
-  }
+  /** Top artists for the period, fetched only in artists mode. */
+  private readonly artists = this.topService.top(() =>
+    this.mode() === 'artists' ? { mode: 'artists', period: this.period() } : undefined,
   );
 
-  /** Songs for the same period as `items()`, regardless of the active mode — used to
-   *  count how many of an artist's tracks also show up in the top-songs list. */
-  private readonly periodSongs = computed(() => SONGS.slice(0, this.limitFor(SONGS)));
+  /** Rows for the active mode, with each artist's crossover count resolved into
+   *  `meta` text — the ranking list just renders `meta`, with no notion of what it
+   *  means. `undefined` while the active list is loading. */
+  protected readonly displayItems = computed<RankingListItem[] | undefined>(() => {
+    if (this.mode() === 'songs') {
+      return this.songs.hasValue() ? this.songs.value().items : undefined;
+    }
+
+    if (!this.artists.hasValue()) {
+      return undefined;
+    }
+
+    return this.artists.value().items.map((artist) => ({ ...artist, meta: this.metaFor(artist) }));
+  });
 
   /** `meta` text for an artist row, or `null` below MIN_CROSSOVER — "top artist,
-   *  1 song" isn't worth showing — and always `null` for songs. */
-  private metaFor(artist: RankingItem): string | null {
-    if (this.mode() !== 'artists') {
+   *  1 song" isn't worth showing — or while the songs are still loading. */
+  private metaFor(artist: RankingListItem): string | null {
+    if (!this.songs.hasValue()) {
       return null;
     }
-    const count = this.periodSongs().filter((song) => song.subtitle === artist.title).length;
-    return count >= MIN_CROSSOVER ? `${count} canciones en tu top` : null;
-  }
 
-  private limitFor(list: readonly RankingItem[]): number {
-    return this.period() === '1m' ? 10 : this.period() === '6m' ? 15 : list.length;
+    const count = this.songs.value().items.filter((song) => song.subtitle === artist.title).length;
+    
+    return count >= MIN_CROSSOVER ? `${count} canciones en tu top` : null;
   }
 }
